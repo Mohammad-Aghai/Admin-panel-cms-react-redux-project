@@ -16,16 +16,8 @@ export const removeUsersFromServer = createAsyncThunk(
 )
 export const addUsersFromServer = createAsyncThunk(
     "users/addUsersFromServer",
-    async () => {
-        return await axios.post(`https://redux-cms.iran.liara.run/api/users/`,{
-            "firstname": "{{$randomFirstName}}",
-            "lastname": "{{$randomLastName}}",
-            "username": "{{$randomUserName}}",
-            "email": "{{$randomEmail}}",
-            "city": "{{$randomCity}}",
-            "age": 22,
-            "courses": 100
-        }).then((response) => response.data);
+    async (newUser) => {
+        return await axios.post(`https://redux-cms.iran.liara.run/api/users/`,newUser).then((response) => response.data);
 
     }
 )
@@ -66,7 +58,7 @@ const usersSlice = createSlice({
             alert("remove process went error please try later!")
         })
         builder.addCase(addUsersFromServer.fulfilled, (state, action) =>{
-             return state
+            state.filteredUsers = [...state.users]; 
         } )
         builder.addCase(addUsersFromServer.rejected, (state, action) => {
             alert("users is not added something wrong with server!")

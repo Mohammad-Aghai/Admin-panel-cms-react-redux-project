@@ -55,8 +55,8 @@ export default function Sidebar() {
   }
   const reciveInputFileProfileHandler = (event) => {
     const profleSrc = inputImageToSrc(event);
-   
-    
+
+
     AdminData.profile = profleSrc;
   }
 

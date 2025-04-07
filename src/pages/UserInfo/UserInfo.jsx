@@ -107,7 +107,7 @@ export default function UsersInfo() {
                       lang="en"
                       type="email"
                       name=""
-                        defaultdefaultValue=""
+                       defaultValue=""
                       id="email"
                       placeholder="       email "
                       className="form-control form__input"
