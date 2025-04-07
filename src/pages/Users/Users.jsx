@@ -12,7 +12,7 @@ export default function Users() {
     dispatch(getUsersFromServer())
   }, [dispatch])
 
-  const newUserData = {
+  let newUserData = {
     firstname:"",
     lastname:"",
     username:"",
@@ -21,7 +21,6 @@ export default function Users() {
     age:"",
     courseCount:""
 }
-
   const users = useSelector((state) => state.users.filteredUsers)
   const [FadeUserModal,setFadeUserModal] = useState(false)
   //modal
@@ -48,8 +47,6 @@ export default function Users() {
         })
       }
     })
-  
-   
   }
    const submitAddUserInfoHandler = (event)=>{
     event.preventDefault()

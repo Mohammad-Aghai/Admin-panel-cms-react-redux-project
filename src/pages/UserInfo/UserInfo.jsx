@@ -1,264 +1,255 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import "./UserInfo.css"
+import { useSelector, useDispatch } from 'react-redux'
+import { changeAdminInfo } from '../../Redux/store/adminInfo'
 export default function UsersInfo() {
+  let adminInfo = useSelector((state) => state.adminInfo)
+  const dispatch = useDispatch()
+  let newAdminInfo = {...adminInfo};
+  const submitAdminInfoHandler = (event) => {
+    event.preventDefault()
+
+    dispatch(changeAdminInfo(
+      {
+        banner: newAdminInfo.banner,
+        courseCount: newAdminInfo.courseCount,
+        email: newAdminInfo.email,
+        firstName: newAdminInfo.firstName,
+        fullName: newAdminInfo.fullName,
+        job: newAdminInfo.job,
+        lastName: newAdminInfo.lastName,
+        password: newAdminInfo.password,
+        profile: newAdminInfo.profile,
+      }
+    ))
+  }
+  //file input
+  const inputImageToSrc = (event) => {
+    const file = event.target.files[0]
+    return URL.createObjectURL(file);
+  }
+  const reciveInputFileBannerHandler = (event) => {
+    const bannerSrc = inputImageToSrc(event)
+    newAdminInfo.banner = bannerSrc
+  }
+  const reciveInputFileProfileHandler = (event) => {
+    const profleSrc = inputImageToSrc(event);
+
+
+    newAdminInfo.profile = profleSrc;
+  }
+
   return (
     <div className="col-8 content px-0">
-    <div className="content__wrapper">
-      <ul className="content__tabs">
-        <li className="content__tab">
-          <Link to="/users" className="content__tab-link">
-            <span className="fa fa-user"></span>
-            کاربران
-          </Link>
-        </li>
-        <li className="content__tab">
-          <Link to="/userInfo" className="content__tab-link active__navItem">
-            <span className="fa fa-book"></span>
-            اطلاعات
-          </Link>
-        </li>
-        <li className="content__tab">
-          <Link to="/courses" className="content__tab-link">
-            <span className="fa fa-store"></span>
-            دوره‌ها
-          </Link>
-        </li>
+      <div className="content__wrapper">
+        <ul className="content__tabs">
+          <li className="content__tab">
+            <Link to="/users" className="content__tab-link">
+              <span className="fa fa-user"></span>
+              کاربران
+            </Link>
+          </li>
+          <li className="content__tab">
+            <Link to="/userInfo" className="content__tab-link active__navItem">
+              <span className="fa fa-book"></span>
+              اطلاعات
+            </Link>
+          </li>
+          <li className="content__tab">
+            <Link to="/courses" className="content__tab-link">
+              <span className="fa fa-store"></span>
+              دوره‌ها
+            </Link>
+          </li>
 
-        <li className="content__tab">
-          <Link to="/articles" className="content__tab-link">
-            <span className="fa fa-newspaper"></span>
-            وبلاگ
-          </Link>
-        </li>
-      </ul>
-      <div className="active"></div>
+          <li className="content__tab">
+            <Link to="/articles" className="content__tab-link">
+              <span className="fa fa-newspaper"></span>
+              وبلاگ
+            </Link>
+          </li>
+        </ul>
+        <div className="active"></div>
 
-      <div className="information">
-        <div id="accordion">
-          <div className="card">
-            <div className="card-header">
-              <a className="btn" data-bs-toggle="collapse" href="#collapseOne">
-                اطلاعات شما
-              </a>
-            </div>
-            <div
-              id="collapseOne"
-              className="collapse show"
-              data-bs-parent="#accordion"
-            >
-              <div className="card-body information-current-admin-wrapper-form p-4">
-                <form action="#" className="form row mx-0">
-                  <div className="form__box-input col-6 px-2">
-                    <span className="fa fa-user form__icon userInfo"></span>
-                    <input
-                      type="text"
-                      name=""
-                      defaultValue=""
-                      id="firstname"
-                      placeholder="         نام "
-                      className="form-control form__input"
-                      required
-                    />
-                    <label htmlFor="firstname" className="form__label my-0">
-                      نام
-                    </label>
-                  </div>
+        <div className="information">
+          <div id="accordion">
+            <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h4 className="modal-title">اطلاعات</h4>
 
-                  <div className="form__box-input col-6 px-2">
-                    <span className="fa fa-users form__icon userInfo" ></span>
-
-                    <input
-                      type="text"
-                      name=""
-                        defaultValue=""
-                      id="lastname"
-                      placeholder="         نام خانوادگی"
-                      className="form-control form__input"
-                      required
-                    />
-                    <label htmlFor="lastname" className="form__label my-0">
-                      نام خانوادگی
-                    </label>
-                  </div>
-
-                  <div className="form__box-input col-6 px-2">
-                    <span className="fa fa-address-book form__icon userInfo"></span>
-
-                    <input
-                      lang="en"
-                      type="text"
-                      name=""
-                       defaultValue=""
-                      id="username"
-                      placeholder="       نام کاربری"
-                      className="form-control form__input"
-                      required
-                    />
-                    <label htmlFor="username" className="form__label my-0">
-                      نام کاربری
-                    </label>
-                  </div>
-
-                  <div className="form__box-input col-6 px-2">
-                    <span className="fa fa-globe form__icon userInfo"></span>
-
-                    <input
-                      lang="en"
-                      type="email"
-                      name=""
-                       defaultValue=""
-                      id="email"
-                      placeholder="       email "
-                      className="form-control form__input"
-                      required
-                    />
-                    <label htmlhtmlFor="email" className="form__label my-0" lang="en">
-                      email
-                    </label>
-                  </div>
-
-                  <div className="form__box-input col-4 px-2">
-                    <span className="fa fa-key form__icon userInfo"></span>
-
-                    <input
-                      type="password"
-                      name=""
-                      placeholder="      رمز جاری"
-                      className="form-control form__input password"
-                      required
-                    />
-                    <label htmlhtmlFor="password" className="form__label my-0">
-                      رمز جاری
-                    </label>
-                    <span className="fa fa-key form__icon userInfo"></span>
-                  </div>
-                  <div className="form__box-input col-4 px-2">
-                    <span className="fa fa-key form__icon userInfo"></span>
-
-                    <input
-                      type="password"
-                      name=""
-                      placeholder="      رمز  جدید"
-                      className="form-control form__input password "
-                      required
-                    />
-                    <label htmlhtmlFor="password" className="form__label my-0">
-                      رمز جدید
-                    </label>
-                    <span className="fa fa-key form__icon userInfo"></span>
-                  </div>
-                  <div className="form__box-input col-4 px-2">
-                    <input
-                      type="password"
-                      name=""
-                      placeholder="     تکرار رمز"
-                      className="form-control form__input password"
-                      required
-                    />
-                    <label htmlFor="password" className="form__label my-0">
-                      تکرار رمز
-                    </label>
-                    <span className="fa fa-key form__icon userInfo"></span>
-                  </div>
-
-                  <div className="change-profile-box px-0 d-flex gap-4 mb-4">
-                    <div className="change-profile-input-box">
-                      <img
-                        src="../../img/admin/profile/banana.png"
-                        className="change-profile-pic"
-                        alt=""
-                      />
-                      <label
-                        htmlhtmlFor="upload-profile-input"
-                        className="upload-profile-input-label"
-                      >
-                        <input
-                          type="file"
-                          id="upload-profile-input"
-                          name=""
-                        />
-                      </label>
-                    </div>
-
-                    <div className="change-banner-input-box">
-                      <img
-                        src="../../img/admin/banner/banner.png"
-                        className="change-banner-pic"
-                        alt=""
-                      />
-                      <label
-                        htmlhtmlFor="upload-banner-input"
-                        className="upload-banner-input-label"
-                      >
-                        <input type="file" id="upload-banner-input" name="" />
-                      </label>
-                    </div>
-                  </div>
-
-                  <button className="btn-custome btn-custome__blue col-6 mb-3">
-                    اپدیت اطلاعات
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-
-          <div className="card">
-            <div className="card-header">
-              <a
-                className="collapsed btn information__team-title"
-                data-bs-toggle="collapse"
-                href="#collapseTwo"
-              >
-                اطلاعات تیم
-              </a>
-            </div>
-            <div
-              id="collapseTwo"
-              className="collapse"
-              data-bs-parent="#accordion"
-            >
-              <div className="row justify-content-center mx-0 p-4">
-                <div className="infromation-team-container">
-                  <div className="infromation-team-cards d-flex flex-wrap">
-                    <div className="card col-4 information__team-card p-2">
-                      <img
-                        className="card-img-top information__admin-img"
-                        src="../../img/store/avaters/avatar2.png"
-                        alt="admin photo"
-                      />
-                      <div className="card-body d-flex flex-column justify-content-between p-4">
-                        <div className="d-flex justify-content-between align-items-center mb-4">
-                          <h4 className="card-title information__admin-name my-0">
-                            عرشیا احسنی
-                          </h4>
-                          <p className="card-text information__admin-role my-0">
-                            باغدار
-                          </p>
-                        </div>
-                        <div className="mt-4 d-flex justify-content-end gap-2">
-                          <button className="btn btn-lg btn-danger">حذف</button>
-                          <button className="btn btn-lg btn-info">ویرایش</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
 
-                <button
-                  className="btn-custome btn-custome__red col-10 mt-4"
-                  data-bs-toggle="modal"
-                  data-bs-target="#new-member"
-                >
-                  افزودن فرد جدید
-                </button>
+                <div className="modal-body position-relative">
+                  <form action="#" className="form row mx-0" onSubmit={(event) => submitAdminInfoHandler(event)}>
+                    <div className="form__box-input col-12 px-2">
+                      <label htmlFor="firstname" className="mx-2 mt-4">
+                        نام :
+                      </label>
+                      <span className="fa fa-user form__icon icon-name-article"></span>
+                      <input
+                        type="text"
+                        name="firstname"
+                        id="firstname"
+                        defaultValue={newAdminInfo.firstName}
+                        className="form-control form__input input-user-firstname"
+                        onChange={(event) => newAdminInfo.firstName = event.target.value}
+                      />
+
+                    </div>
+
+                    <div className="form__box-input col-12 px-2">
+                      <label htmlFor="lastname" className="mx-2 mt-4">
+                        نام خانوادگی :
+                      </label>
+                      <span className="fa fa-users form__icon"></span>
+                      <input
+                        type="text"
+                        name=""
+                        defaultValue={newAdminInfo.lastName}
+                        id="lastname"
+                        className="form-control form__input input-user-lastname"
+                        onChange={(event) => newAdminInfo.lastName = event.target.value}
+                      />
+
+                    </div>
+
+                    <div className="form__box-input col-12 px-2">
+                      <label htmlFor="username" className="mx-2 mt-4">
+                        نام کاربری :
+                      </label>
+                      <span className="fa fa-user form__icon"></span>
+                      <input
+                        lang="en"
+                        type="text"
+                        name=""
+                        defaultValue={newAdminInfo.fullName}
+                        id="username"
+                        className="form-control form__input input-user-username"
+                        onChange={(event) => newAdminInfo.fullName = event.target.value}
+
+                      />
+
+                    </div>
+
+                    <div className="form__box-input col-12 px-2">
+                      <label htmlFor="email" className="mx-2 mt-4">
+                        ایمیل :
+                      </label>
+                      <span className="fa fa-globe form__icon"></span>
+                      <input
+                        lang="en"
+                        type="email"
+                        name="email"
+                        defaultValue={newAdminInfo.email}
+                        id="email"
+                        className="form-control form__input input-user-email"
+                        onChange={(event) => newAdminInfo.email = event.target.value}
+                      />
+
+                    </div>
+
+                    <div className="form__box-input col-12 px-2">
+                      <label htmlFor="job" className="mx-2 mt-4">
+                        شغل :
+                      </label>
+                      <span className="fa fa-briefcase form__icon"></span>
+                      <input
+                        type="text"
+                        name=""
+                        id="job"
+                        defaultValue={newAdminInfo.job}
+                        className="form-control form__input input-user-password"
+                        onChange={(event) => newAdminInfo.job = event.target.value}
+                      />
+
+                    </div>
+                    <div className="form__box-input col-12 px-2">
+                      <label htmlFor="password" className="mx-2 mt-4">
+                        پسورد :
+                      </label>
+                      <span className="fa fa-key form__icon"></span>
+                      <input
+                        type="password"
+                        name=""
+                        id="password"
+                        defaultValue={newAdminInfo.password}
+                        className="form-control form__input input-user-password"
+                        onChange={(event) => newAdminInfo.password = event.target.value}
+                      />
+
+                    </div>
+                    <div className="form__box-input col-12 px-2">
+                      <label htmlFor="courseCount" className="mx-2 mt-4">
+                        تعداد درس :
+                      </label>
+                      <span className="fa fa-wallet form__icon"></span>
+                      <input
+                        type="number"
+                        name=""
+                        placeholder={newAdminInfo.courseCount}
+                        id="courseCount"
+                        className="form-control form__input input-user-product"
+                        onChange={(event) => newAdminInfo.courseCount = event.target.value}
+                      />
+
+                    </div>
+                    <div className="change-profile-box px-0 d-flex gap-4 mb-4 mt-5">
+                      <div className="change-profile-input-box">
+                        <img
+                          src="../../img/admin/profile/banana.png"
+                          className="change-profile-pic"
+                          alt=""
+                        />
+                        <label
+                          htmlFor="upload-profile-input"
+                          className="upload-profile-input-label"
+                        >
+                          <input
+                            type="file"
+                            id="upload-profile-input"
+                            name="upload-profile-input"
+                            accept="image/*"
+                            onChange={(event) => reciveInputFileProfileHandler(event)}
+                          />
+                        </label>
+                      </div>
+
+                      <div className="change-banner-input-box">
+                        <img
+                          src="../../img/admin/banner/banner.png"
+                          className="change-banner-pic"
+                          alt=""
+                        />
+                        <label
+                          htmlFor="upload-banner-input"
+                          className="upload-banner-input-label"
+                        >
+                          <input type="file" id="upload-banner-input" accept="image/*" name="upload-banner-input" onChange={(event) => reciveInputFileBannerHandler(event)} />
+                        </label>
+                      </div>
+                    </div>
+                    <div className="modal-footer">
+                      <button
+                        type='submit'
+                        className="btn btn-danger btn-lg"
+                        data-bs-dismiss="modal"
+                      >
+                        تبت ویرایش
+                      </button>
+                    </div>
+                  </form>
+                </div>
+
+
               </div>
             </div>
+
+
           </div>
         </div>
       </div>
     </div>
-  </div>
   )
 }

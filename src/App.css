@@ -384,7 +384,7 @@ body {
 }
 
 .information .form__icon:not(.form__icon-password) {
-  right: 5%;
+  right: 2%;
 }
 
 .information .form__icon-password {
@@ -844,4 +844,7 @@ margin: 0 !important
 }
 .form__input{
   margin-top: 10px;
+}
+.active__navItem {
+  color: var(--dark-red) !important;
 }

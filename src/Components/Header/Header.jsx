@@ -29,12 +29,6 @@ swal({
         <button className="btn-custome btn-header__dark-mode" onClick={darkModeHandler}>
           <span className={darkMode ?"fa fa-moon header__icon": "fa fa-sun header__icon"}></span>
         </button>
-
-        <button className="btn-custome btn-header__alert">
-          <span className="fa fa-bell header__icon"></span>
-          <span className="header__alert-count">5</span>
-        </button>
-
         <button className="btn-custome btn-custome__blue btn-header__log-out" onClick={exitHandler}>
           <span className="fa fa-sign-out header__icon"></span>
           خروج از پنل

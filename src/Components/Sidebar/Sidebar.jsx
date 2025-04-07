@@ -2,20 +2,10 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { changeAdminInfo } from '../../Redux/store/adminInfo';
 export default function Sidebar() {
-  const adminInfo = useSelector((state) => state.adminInfo)
+  let adminInfo = useSelector((state) => state.adminInfo)
   const dispatch = useDispatch()
   const [fadeModal, setFadeModal] = useState(false)
-  const AdminData = {
-    banner: "../../images/background.webp",
-    courseCount: 12,
-    email: "MohamadAghai1381@email.com",
-    firstName: "محمد",
-    fullName: "محمد آقائی",
-    job: "Front-end Engineer",
-    lastName: "آقائی",
-    password: "1381",
-    profile: "../../images/profileImage.webp"
-  }
+  let newAdminInfo = {...adminInfo}
   //modal
   const openModalHandler = () => {
     setFadeModal((prevState) => !prevState)
@@ -30,15 +20,15 @@ export default function Sidebar() {
 
     dispatch(changeAdminInfo(
       {
-        banner: AdminData.banner,
-        courseCount: AdminData.courseCount,
-        email: AdminData.email,
-        firstName: AdminData.firstName,
-        fullName: AdminData.fullName,
-        job: AdminData.job,
-        lastName: AdminData.lastName,
-        password: AdminData.password,
-        profile: AdminData.profile,
+        banner: newAdminInfo.banner,
+        courseCount: newAdminInfo.courseCount,
+        email: newAdminInfo.email,
+        firstName: newAdminInfo.firstName,
+        fullName: newAdminInfo.fullName,
+        job: newAdminInfo.job,
+        lastName: newAdminInfo.lastName,
+        password: newAdminInfo.password,
+        profile: newAdminInfo.profile,
       }
     ))
   }
@@ -51,13 +41,13 @@ export default function Sidebar() {
   }
   const reciveInputFileBannerHandler = (event) => {
     const bannerSrc = inputImageToSrc(event)
-    AdminData.banner = bannerSrc
+    newAdminInfo.banner = bannerSrc
   }
   const reciveInputFileProfileHandler = (event) => {
     const profleSrc = inputImageToSrc(event);
 
 
-    AdminData.profile = profleSrc;
+    newAdminInfo.profile = profleSrc;
   }
 
   return (
@@ -88,9 +78,9 @@ export default function Sidebar() {
                   type="text"
                   name="firstname"
                   id="firstname"
-                  defaultValue={adminInfo.firstName}
+                  defaultValue={newAdminInfo.firstName}
                   className="form-control form__input input-user-firstname"
-                  onChange={(event) => AdminData.firstName = event.target.value}
+                  onChange={(event) => newAdminInfo.firstName = event.target.value}
                 />
 
               </div>
@@ -103,10 +93,10 @@ export default function Sidebar() {
                 <input
                   type="text"
                   name=""
-                  defaultValue={adminInfo.lastName}
+                  defaultValue={newAdminInfo.lastName}
                   id="lastname"
                   className="form-control form__input input-user-lastname"
-                  onChange={(event) => AdminData.lastName = event.target.value}
+                  onChange={(event) => newAdminInfo.lastName = event.target.value}
                 />
 
               </div>
@@ -120,10 +110,10 @@ export default function Sidebar() {
                   lang="en"
                   type="text"
                   name=""
-                  defaultValue={adminInfo.fullName}
+                  defaultValue={newAdminInfo.fullName}
                   id="username"
                   className="form-control form__input input-user-username"
-                  onChange={(event) => AdminData.fullName = event.target.value}
+                  onChange={(event) => newAdminInfo.fullName = event.target.value}
 
                 />
 
@@ -138,10 +128,10 @@ export default function Sidebar() {
                   lang="en"
                   type="email"
                   name="email"
-                  defaultValue={adminInfo.email}
+                  defaultValue={newAdminInfo.email}
                   id="email"
                   className="form-control form__input input-user-email"
-                  onChange={(event) => AdminData.email = event.target.value}
+                  onChange={(event) => newAdminInfo.email = event.target.value}
                 />
 
               </div>
@@ -155,9 +145,9 @@ export default function Sidebar() {
                   type="text"
                   name=""
                   id="job"
-                  defaultValue={adminInfo.job}
+                  defaultValue={newAdminInfo.job}
                   className="form-control form__input input-user-password"
-                  onChange={(event) => AdminData.job = event.target.value}
+                  onChange={(event) => newAdminInfo.job = event.target.value}
                 />
 
               </div>
@@ -170,9 +160,9 @@ export default function Sidebar() {
                   type="password"
                   name=""
                   id="password"
-                  defaultValue={adminInfo.password}
+                  defaultValue={newAdminInfo.password}
                   className="form-control form__input input-user-password"
-                  onChange={(event) => AdminData.password = event.target.value}
+                  onChange={(event) => newAdminInfo.password = event.target.value}
                 />
 
               </div>
@@ -184,10 +174,10 @@ export default function Sidebar() {
                 <input
                   type="number"
                   name=""
-                  placeholder={adminInfo.courseCount}
+                  placeholder={newAdminInfo.courseCount}
                   id="courseCount"
                   className="form-control form__input input-user-product"
-                  onChange={(event) => AdminData.courseCount = event.target.value}
+                  onChange={(event) => newAdminInfo.courseCount = event.target.value}
                 />
 
               </div>
@@ -253,20 +243,20 @@ export default function Sidebar() {
           <div className="card position-relative text-center card__borderred">
             <img
               className="card-img-top sidebar__img-banner"
-              src={adminInfo.banner}
+              src={newAdminInfo.banner}
               alt="banner admin photo"
             />
             <div className="card-body">
-              <h4 className="card-title sidebar__top-name">{adminInfo.fullName}</h4>
+              <h4 className="card-title sidebar__top-name">{newAdminInfo.fullName}</h4>
               <p className="card-text sidebar__top-email" lang="en">
-                {adminInfo.job}
+                {newAdminInfo.job}
               </p>
               <ul className="list px-0">
                 <li className="list__item">
                   <span className="fa fa-text-height"></span>
                   <p className="list__text mb-0">
                     <span className="">نام کوچک</span>
-                    <span className="list__firstname">{adminInfo.firstName}</span>
+                    <span className="list__firstname">{newAdminInfo.firstName}</span>
                   </p>
                 </li>
                 <li className="list__item">
@@ -274,7 +264,7 @@ export default function Sidebar() {
 
                   <p className="list__text mb-0">
                     <span className="">نام خانوادگی</span>
-                    <span className="list__lastname">{adminInfo.lastName}</span>
+                    <span className="list__lastname">{newAdminInfo.lastName}</span>
                   </p>
                 </li>
                 <li className="list__item">
@@ -282,7 +272,7 @@ export default function Sidebar() {
 
                   <p className="list__text mb-0">
                     <span className="">تعداد دوره</span>
-                    <span className="list__course-count">{adminInfo.courseCount}</span>
+                    <span className="list__course-count">{newAdminInfo.courseCount}</span>
                   </p>
                 </li>
               </ul>
@@ -294,7 +284,7 @@ export default function Sidebar() {
 
             <div className="sidebar__profile">
               <img
-                src={adminInfo.profile}
+                src={newAdminInfo.profile}
                 alt="admin photo"
                 className="sidebar__img-profile"
               />

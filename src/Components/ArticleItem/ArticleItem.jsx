@@ -1,5 +1,10 @@
 import React from 'react'
-export default function ArticleItem({id,title,body}) {
+export default function ArticleItem({_id,
+  title,
+  category,
+  views,
+  desc,
+  deleteArticleHandler}) {
   return (
     <div className="articles__item">
     <img
@@ -11,7 +16,7 @@ export default function ArticleItem({id,title,body}) {
       <div className="articles__info">
         <h3 className="articles__name">{title}</h3>
         <p className="articles__short-desc">
-          {body}
+          {desc}
         </p>
       </div>
       <div className="articles__tags">
@@ -20,20 +25,19 @@ export default function ArticleItem({id,title,body}) {
             <span className="fa fa-tags"></span>
             <p className="articles__tag-text articles__category my-0">
               <span>دسته بندی :</span>
-              <span className="articles__category-value">فرانت‌اند</span>
+              <span className="articles__category-value">{category}</span>
             </p>
           </div>
           <div className="articles__visited-box d-flex gap-2 align-items-center">
             <span className="fa fa-users"></span>
             <p className="articles__tag-text articles__visited my-0">
               <span>تعداد بازدید :</span>
-              <span className="articles__visited-count">{id}</span>
+              <span className="articles__visited-count">{views}</span>
             </p>
           </div>
         </div>
         <div className="articles__btns">
-          <button className="op-btn btn btn-danger btn-lg">حذف</button>
-          <button className="op-btn btn btn-info btn-lg">ویرایش</button>
+          <button className="op-btn btn btn-danger btn-lg" onClick={()=> deleteArticleHandler(_id)}>حذف</button>
         </div>
       </div>
     </div>
